@@ -33,3 +33,15 @@ Sparse Graph: store with Adjacency List
 * Graph is strongly connected if there is a path from any vertex to any other vertex
 * Undirected graph's can be **connected**, directed graphs can be **strongly connected**
 * If directed graph is **not** strongly connected, but could be turned into connected graph by treating all edges as undirected, it is called **wealky connected**
+
+**Adjacency Matrix**
+* 2d array to store edges in graph
+* 0 (or infinity, etc.) for no edge, 1 (or weight) for edge
+* O(v<sup>2</sup>) space
+
+**Adjacency List**
+* Array of size |v| with pointers to head of linked lists
+* Each linked list stores all the edges for that vertex
+* O(|E|) space
+
+**NEXT: using binary search tree to store edges**
