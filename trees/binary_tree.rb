@@ -1,8 +1,7 @@
 class BinaryTreeNode
-  attr_accessor :left, :right, :parent, :val
+  attr_accessor :left, :right, :val
 
-  def initialize(val = nil, parent = nil)
+  def initialize(val = nil)
     @val = val
-    @parent = parent
   end
 end
