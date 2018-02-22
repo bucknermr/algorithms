@@ -8,7 +8,7 @@ for arr_i in (0..6-1)
     arr[arr_i] = arr_t.split(' ').map(&:to_i)
 end
 
-max = 0
+max = -1.0 / 0.0
 
 (arr.length - 2).times do |i|
     (arr[i].length - 2).times do |j|
