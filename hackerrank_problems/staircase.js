@@ -24,6 +24,13 @@ function readLine() {
 
 function staircase(n) {
     // Complete this function
+    spaces = n - 1;
+    hashes = 1;
+    for (let i = 0; i < n; i++) {
+        console.log(' '.repeat(spaces) + '#'.repeat(hashes));
+        spaces--;
+        hashes++;
+    }
 }
 
 function main() {
