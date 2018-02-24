@@ -1,3 +1,5 @@
+// https://www.hackerrank.com/challenges/30-abstract-classes/problem
+
 // Declare your class here.
 class MyBook extends Book {
     constructor(title, author, price) {
@@ -11,20 +13,3 @@ class MyBook extends Book {
         console.log(`Price: ${this.price}`);
     }
 }
-    /**
-    *   Class Constructor
-    *
-    *   @param title The book's title.
-    *   @param author The book's author.
-    *   @param price The book's price.
-    **/
-    // Write your constructor here
-
-    /**
-    *   Method Name: display
-    *
-    *   Print the title, author, and price in the specified format.
-    **/
-    // Write your method here
-
-// End class
