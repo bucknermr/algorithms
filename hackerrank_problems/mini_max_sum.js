@@ -24,6 +24,15 @@ function readLine() {
 
 function miniMaxSum(arr) {
     // Complete this function
+    const total_sum = arr.reduce((acc, n) => acc + n, 0);
+    let min = 1 / 0
+    let max = -1 / 0
+    arr.forEach(n => {
+        const sum = total_sum - n;
+        if (sum < min) { min = sum; }
+        if (sum > max) { max = sum; }
+    });
+    console.log(`${min} ${max}`);
 }
 
 function main() {
