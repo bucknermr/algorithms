@@ -12,10 +12,9 @@ var lengthOfLongestSubstring = function(s) {
   let max = 1;
 
   let i = 0;
-  let j = 0;
+  let j = 1;
 
   while(j < s.length) {
-    j++;
     let letter = s[j];
     chars[letter] = ++chars[letter] || 1;
     if (chars[letter] > 1) {
@@ -28,6 +27,7 @@ var lengthOfLongestSubstring = function(s) {
     }
     const len = (j - i + 1);
     max = len > max ? len : max;
+    j++;
   }
 
   return max;
