@@ -1,61 +1,42 @@
 // https://leetcode.com/problems/add-two-numbers/description/
 
 /**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+* Definition for singly-linked list.
+* function ListNode(val) {
+*     this.val = val;
+*     this.next = null;
+* }
+*/
 /**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
+* @param {ListNode} l1
+* @param {ListNode} l2
+* @return {ListNode}
+*/
 var addTwoNumbers = function(l1, l2) {
-    let remainder = 0;
-    let headNode;
-    let prev = new ListNode(null);
-    while (l1 && l2) {
-        let val = l1.val + l2.val + remainder;
+  let num = l1.val + l2.val;
+  let val = num % 10;
+  let remainder = Math.floor((num - val) / 10);
 
-        if (val > 9) {
-            val = val - 10;
-            remainder = 1;
-        } else {
-            remainder = 0;
-        }
+  let head = new ListNode(val);
+  let currentNode = head;
 
-        let node = new ListNode(val);
-        prev.next = node;
-        prev = node;
-        headNode = headNode || node;
+  let links = [l1, l2].map(link => link.next).filter(link => link);
 
-        l1 = l1.next;
-        l2 = l2.next;
-    }
+  while (links.length > 0) {
+    num = links.reduce((acc, link) => acc + link.val, 0) + remainder;
 
-    let node = l1 || l2;
-    if (!node && remainder > 0) {
-      prev.next = new ListNode(remainder);
-    } else {
-      while (node || (remainder > 0)) {
-          if (!node) {
-              prev.next = new ListNode(remainder);
-              break;
-          }
-          val = node.val + remainder;
-          if (val > 9) {
-              remainder = 1;
-          } else {
-              remainder = 0;
-          }
-          node = new ListNode(val);
-          prev.next = node;
-          prev = node;
-          node = node.next;
-      }
-    }
+    val = num % 10;
+    remainder = Math.floor((num - val) / 10);
 
-    return headNode
+    currentNode.next = new ListNode(val);
+    currentNode = currentNode.next;
+
+    links = links.map(link => link.next).filter(link => link);
+  }
+
+  if (remainder) {
+    currentNode.next = new ListNode(remainder);
+  }
+
+  return head;
 };
