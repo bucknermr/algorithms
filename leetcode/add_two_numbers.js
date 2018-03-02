@@ -13,19 +13,14 @@
 * @return {ListNode}
 */
 var addTwoNumbers = function(l1, l2) {
-  let num = l1.val + l2.val;
-  let val = num % 10;
-  let remainder = Math.floor((num - val) / 10);
-
-  let head = new ListNode(val);
+  let head = new ListNode(0);
   let currentNode = head;
-
-  let links = [l1, l2].map(link => link.next).filter(link => link);
+  let links = [l1, l2];
+  let remainder = 0;
 
   while (links.length > 0) {
-    num = links.reduce((acc, link) => acc + link.val, 0) + remainder;
-
-    val = num % 10;
+    let num = links.reduce((acc, link) => acc + link.val, 0) + remainder;
+    let val = num % 10;
     remainder = Math.floor((num - val) / 10);
 
     currentNode.next = new ListNode(val);
@@ -38,5 +33,5 @@ var addTwoNumbers = function(l1, l2) {
     currentNode.next = new ListNode(remainder);
   }
 
-  return head;
+  return head.next;
 };
