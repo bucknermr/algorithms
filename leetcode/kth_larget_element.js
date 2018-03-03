@@ -46,5 +46,3 @@ function arrayElementSwap(arr, i, j) {
   arr[i] = arr[j];
   arr[j] = swap;
 }
-
-console.log(findKthLargest([2, 1], 1));
