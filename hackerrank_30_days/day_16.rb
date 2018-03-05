@@ -3,3 +3,11 @@
 #!/bin/ruby
 
 S = gets.strip
+
+begin
+    result = Integer(S)
+rescue
+    result = 'Bad String'
+ensure
+    puts result
+end
