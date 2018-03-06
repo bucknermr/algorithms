@@ -4,12 +4,10 @@
 
 def kangaroo(x1, v1, x2, v2)
     # Complete this function
-    return "NO" if (x1 > x2 && v1 > v2) || (x2 > x1 && v2 > v1)
+    difference = (x2 - x1)
+    change = (v1 - v2)
 
-    difference = (x1 - x2).abs
-    change = (v1 - v2).abs
-
-    return "NO" if change === 0 && difference > 0
+    return "NO" if change <= 0
     difference % change === 0 ? "YES" : "NO"
 end
 
