@@ -6,7 +6,7 @@
 # Complete the getTotalX function below.
 #
 def getTotalX(a, b)
-  factors_of_b = (1..b.min).select do |num|
+  factors_of_b = (a.min..b.min).select do |num|
     b.all? { |n| num.factor?(n) }
   end
 
