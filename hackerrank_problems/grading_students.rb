@@ -2,7 +2,7 @@
 
 #!/bin/ruby
 
-def solve(grades)
+def gradingStudents(grades)
     # Complete this function
   grades.map do |grade|
     if grade < 38
