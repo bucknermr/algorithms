@@ -8,8 +8,8 @@ def solve(grades)
     if grade < 38
       grade
     else
-      next_highest_5 = grade + (5 - (grade % 5))
-      (next_highest_5 - grade < 3) ? next_highest_5 : grade
+      diff = 5 - (grade % 5)
+      diff < 3 ? grade + diff : grade
     end
   end
 end
