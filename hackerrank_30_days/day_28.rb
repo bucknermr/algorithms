@@ -1,7 +1,9 @@
+# https://www.hackerrank.com/challenges/30-regex-patterns/problem
+
 #!/bin/ruby
 
 def gmail?(email)
-  email.match?(/@gmail\.com$/)
+  email.match? /^[A-Za-z0-9._%+-]+@gmail.com$/
 end
 
 def quicksort(arr, &blk)
@@ -13,7 +15,7 @@ def quicksort_util(arr, start_idx = 0, end_idx = arr.length - 1, &blk)
   return arr if start_idx >= end_idx
 
   barrier = start_idx
-  pivot = arr.first
+  pivot = arr[start_idx]
 
   (start_idx + 1..end_idx).each do |i|
     if blk.call(pivot, arr[i]) == 1
