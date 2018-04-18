@@ -1,16 +1,17 @@
 def get_max_profit(stock_prices)
+  raise "Need at least 2 stock prices" if stock_prices.length < 2
 
-  # Calculate the max profit.
+  min = stock_prices.first
+  best_profit = -1/0.0
 
+  stock_prices.drop(1).each do |price|
+    profit = price - min
+    best_profit = profit if profit > best_profit
+    min = price if price < min
+  end
 
-  return 0
+  best_profit
 end
-
-
-
-
-
-
 
 
 
