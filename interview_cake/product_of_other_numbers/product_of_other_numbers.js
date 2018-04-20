@@ -1,3 +1,5 @@
+// Greedy solution:
+
 function getProductsOfAllIntsExceptAtIndex(intArray) {
   if (intArray.length < 2) { throw "Need at least 2 integers"; }
 
@@ -20,6 +22,37 @@ function getProductsOfAllIntsExceptAtIndex(intArray) {
   return products;
 }
 
+// Divison solution:
+
+// function getProductsOfAllIntsExceptAtIndex(intArray) {
+//   if (intArray.length < 2) { throw "Need at least 2 integers"; }
+//
+//   const len = intArray.length;
+//   const products = new Array(len).fill(0);
+//   let zeroIdx = null;
+//
+//   let totalProduct = 1;
+//   for (let i = 0; i < len; i++) {
+//     const el = intArray[i];
+//
+//     if (el === 0) {
+//       if (zeroIdx) { return products; }
+//       zeroIdx = i;
+//     } else {
+//       totalProduct *= el;
+//     }
+//   }
+//
+//   if (zeroIdx) {
+//     products[zeroIdx] = totalProduct;
+//   } else {
+//     intArray.forEach((el, i) => {
+//       products[i] = totalProduct / el;
+//     });
+//   }
+//
+//   return products;
+// }
 
 
 
