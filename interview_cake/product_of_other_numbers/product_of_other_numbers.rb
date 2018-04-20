@@ -1,5 +1,3 @@
-require 'rspec'
-
 # Greedy solution:
 def products_excluding_index(int_array)
   raise ArgumentError, "Need at least 2 integers" if int_array.length < 2
