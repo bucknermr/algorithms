@@ -1,26 +1,24 @@
 function getProductsOfAllIntsExceptAtIndex(intArray) {
   if (intArray.length < 2) { throw "Need at least 2 integers"; }
   const products = [];
-  const store = {};
+  const store = { 0: intArray[0] };
 
-  intArray.forEach((el, i) => {
-    if (!(el in store)) {
-      store[el] = intArray.reduce((acc, num, idx) => {
-        return idx === i ? acc : acc * num;
-      }, 1);
+  intArray.forEach((el, idx) => {
+    let product = 1;
+    if (idx !== 0) {
+      store[idx] = store[idx - 1] * el;
+      product = store[idx - 1];
     }
-    products.push(store[el]);
+
+    for (let i = idx + 1, len = intArray.length; i < len; i++) {
+      product *= intArray[i];
+    }
+
+    products.push(product);
+
   });
   return products;
 }
-
-
-
-
-
-
-
-
 
 
 
