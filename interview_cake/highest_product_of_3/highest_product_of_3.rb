@@ -1,9 +1,131 @@
+require 'byebug'
+# def highest_product_of_3(int_array)
+#   sorted = int_array.sort
+#   [
+#     sorted[-3..-1].reduce(:*),
+#     sorted[0..1].reduce(:*) * sorted[-1],
+#   ].max
+# end
+
 def highest_product_of_3(int_array)
-  sorted = int_array.sort
-  [
-    sorted[-3..-1].reduce(:*),
-    sorted[0..1].reduce(:*) * sorted[-1],
-  ].max
+  min_heap = BinaryHeap.new { |x, y| x <=> y }
+  max_heap = BinaryHeap.new { |y, x| y <=> x }
+
+  # debugger
+
+  3.times do |i|
+    min_heap.add(int_array[i])
+    max_heap.add(int_array[i])
+    max_heap.extract if i == 2
+  end
+
+  int_array.drop(3).each do |el|
+    if el > min_heap.peek
+      min_heap.add(el)
+      min_heap.extract
+    end
+    if el < max_heap.peek
+      max_heap.add(el)
+      max_heap.extract
+    end
+  end
+
+  debugger
+
+  a = min_heap.inject(:*)
+  2.times { min_heap.extract }
+  b = max_heap.inject(:*) * min_heap.first
+
+  p [a, b].max
+end
+
+class BinaryHeap
+  include Enumerable
+
+  attr_reader :store
+
+  def initialize(&prc)
+    @prc = prc || Proc.new { |x, y| x <=> y}
+    @store = []
+  end
+
+  def length
+    @store.length
+  end
+
+  def peek
+    @store.first
+  end
+
+  def extract
+    top = @store.first
+    @store[0] = @store[-1]
+    @store.pop
+    heapify_down(0)
+    top
+  end
+
+  def add(el)
+    @store << el
+    heapify_up(length - 1)
+  end
+
+  def heapify_down(idx)
+    BinaryHeap.heapify_down(@store, idx, @prc)
+  end
+
+  def heapify_up(idx)
+    BinaryHeap.heapify_up(@store, idx, @prc)
+  end
+
+  def self.heapify_down(store, idx, prc)
+    current_el = store[idx]
+    child_indices = BinaryHeap.child_indices(idx)
+
+    children = child_indices.map { |i| store[i] }
+
+    if children.any? { |child| prc.call(current_el, child) == 1 }
+      swap_idx = children.length > 1 && prc.call(*children) == 1 ? child_indices[1] : child_indices[0]
+      store[idx], store[swap_idx] = store[swap_idx], store[idx]
+      BinaryHeap.heapify_down(store, swap_idx, prc)
+    end
+
+    store
+  end
+
+  def self.heapify_up(store, idx, prc)
+    return store if idx == 0
+    parent_index = BinaryHeap.parent_index(idx)
+    if prc.call(store[parent_index], store[idx]) == 1
+      store[idx], store[parent_index] = store[parent_index], store[idx]
+      BinaryHeap.heapify_up(store, parent_index, prc)
+    end
+
+    store
+  end
+
+  def each(&blk)
+    @store.each(&blk)
+  end
+
+  def to_s
+    @store
+  end
+
+  def inspect
+    to_s
+  end
+
+  private
+
+  def self.child_indices(idx)
+    [(idx * 2) + 1, (idx * 2) + 2]
+  end
+
+  def self.parent_index(idx)
+    (idx - 1) / 2
+  end
+
 end
 
 # run your function through some test cases here
