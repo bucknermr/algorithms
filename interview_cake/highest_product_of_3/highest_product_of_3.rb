@@ -1,4 +1,3 @@
-require 'byebug'
 # def highest_product_of_3(int_array)
 #   sorted = int_array.sort
 #   [
@@ -9,9 +8,7 @@ require 'byebug'
 
 def highest_product_of_3(int_array)
   min_heap = BinaryHeap.new { |x, y| x <=> y }
-  max_heap = BinaryHeap.new { |y, x| y <=> x }
-
-  # debugger
+  max_heap = BinaryHeap.new { |x, y| y <=> x }
 
   3.times do |i|
     min_heap.add(int_array[i])
@@ -30,13 +27,11 @@ def highest_product_of_3(int_array)
     end
   end
 
-  debugger
-
   a = min_heap.inject(:*)
   2.times { min_heap.extract }
   b = max_heap.inject(:*) * min_heap.first
 
-  p [a, b].max
+  [a, b].max
 end
 
 class BinaryHeap
@@ -127,9 +122,6 @@ class BinaryHeap
   end
 
 end
-
-# run your function through some test cases here
-# remember: debugging is half the battle!
 
 
 # [3, 4, 2, 6, 100, 0, 1] => 4 * 6 * 100 === 2400
