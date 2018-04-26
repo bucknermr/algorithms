@@ -1,7 +1,5 @@
 function highestProductOf3(intArray) {
-  const sorted = intArray.slice().sort((a, b) => {
-    return a < b ? -1 : (a > b ? 1 : 0);
-  });
+  const sorted = intArray.slice().sort((a, b) => a - b);
   const endIdx = sorted.length - 1;
 
   const a = sorted[0] * sorted[1] * sorted[endIdx];
