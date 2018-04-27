@@ -72,7 +72,7 @@ class BinaryHeap:
 
 class MaxHeap(BinaryHeap):
     def __init__(self):
-        BinaryHeap.__init__(self, lambda x, y: y - x)
+        super().__init__(lambda x, y: y - x)
 
 class MinHeap(BinaryHeap):
     pass
