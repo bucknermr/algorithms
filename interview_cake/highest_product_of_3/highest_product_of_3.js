@@ -69,13 +69,10 @@ class BinaryHeap {
     if (children.some(el => comp(currentEl, el) > 0)) {
       const swapIdx = (children.length > 1 && comp(...children) > 0) ?
         childIndices[1] : childIndices[0];
-        store[idx] = store[swapIdx];
-        store[swapIdx] = currentEl;
-      // [store[idx], store[swapIdx]] = [store[swapIdx], currentEl];
+      [store[idx], store[swapIdx]] = [store[swapIdx], currentEl];
       return BinaryHeap.heapifyDown(swapIdx, store, comp);
-    } else {
-      return store;
     }
+    return store;
   }
 
   static heapifyUp(idx, store, comp) {
@@ -85,9 +82,6 @@ class BinaryHeap {
     const parentEl = store[parentIndex];
     if (comp(parentEl, currentEl) > 0) {
       [store[idx], store[parentIndex]] = [parentEl, currentEl];
-      store[idx] = parentEl;
-      store[parentIndex] = currentEl;
-      // [store[idx], store[parentIndex]] = [parentEl, currentEl];
       return BinaryHeap.heapifyUp(parentIndex, store, comp);
     }
     return store;
