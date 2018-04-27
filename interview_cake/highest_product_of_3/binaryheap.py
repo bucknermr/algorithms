@@ -31,7 +31,7 @@ class BinaryHeap:
 
             swap_idx = (
                 children_indices[1] if (len(children) > 1 and
-                comp(children[0], children[1]) > 0)
+                comp(*children) > 0)
                 else children_indices[0])
 
             store[idx], store[swap_idx] = store[swap_idx], store[idx]

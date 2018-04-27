@@ -40,7 +40,7 @@ class BinaryHeap
   attr_reader :store
 
   def initialize(&prc)
-    @prc = prc || Proc.new { |x, y| x <=> y}
+    @prc = prc || Proc.new { |x, y| x <=> y }
     @store = []
   end
 
@@ -75,7 +75,8 @@ class BinaryHeap
 
   def self.heapify_down(store, idx, prc)
     current_el = store[idx]
-    child_indices = BinaryHeap.child_indices(idx)
+    child_indices = BinaryHeap.child_indices(idx, store.length)
+    return store if store.empty?
 
     children = child_indices.map { |i| store[i] }
 
@@ -111,10 +112,8 @@ class BinaryHeap
     to_s
   end
 
-  private
-
-  def self.child_indices(idx)
-    [(idx * 2) + 1, (idx * 2) + 2]
+  def self.child_indices(idx, len)
+    [(idx * 2) + 1, (idx * 2) + 2].select { |i| i < len }
   end
 
   def self.parent_index(idx)
