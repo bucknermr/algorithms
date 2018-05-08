@@ -1,13 +1,20 @@
 def merge_ranges(meetings):
+    sorted_copy = sorted(meetings[:])
+    results = [sorted_copy[0]]
 
-    # Merge meeting ranges
+    for time in sorted_copy[1:]:
+        last = results[-1][1]
+
+        if last >= time[0]:
+            results[-1] = (results[-1][0], max(last, time[1]))
+        else:
+            results.append(time)
+
+    return results
 
 
-    return []
-
-
-meetings = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
-print(merge_ranges(meetings))
+# meetings = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+# print(merge_ranges(meetings))
 
 
 
