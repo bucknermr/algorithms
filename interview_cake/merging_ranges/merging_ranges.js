@@ -1,15 +1,4 @@
 function mergeRanges(meetings) {
-
-  // [
-  //  {startTime: 1, endTime: 3},
-  // ]
-
-  // i = 1;
-  // j = 0;
-
-  // time = {startTime: 1, endTime: 3}
-  // curTime = {startTime: 4, endTime: 8}
-
     // Merge meetings ranges
     const results = [meetings[0]];
 
