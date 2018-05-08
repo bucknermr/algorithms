@@ -1,59 +1,61 @@
 function mergeRanges(meetings) {
 
+  // [
+  //  {startTime: 1, endTime: 3},
+  // ]
+
+  // i = 1;
+  // j = 0;
+
+  // time = {startTime: 1, endTime: 3}
+  // curTime = {startTime: 4, endTime: 8}
+
     // Merge meetings ranges
-    const store = {};
+    const results = [meetings[0]];
 
-    meetings.forEach(time => {
-      if (store.hasOwnProperty(time.startTime)) {
-        return true;
-      } else if (store) {
-        return true;
+    for (let i = 1; i < meetings.length; i++) {
+      let curTime = meetings[i];
+      let merged = false;
+
+      for (let j = 0; j < results.length; j++) {
+        let time = results[j];
+
+        if (!merged && isOverlapping(time, curTime)) {
+          results[j] = {
+            startTime: Math.min(time.startTime, curTime.startTime),
+            endTime: Math.max(time.endTime, curTime.endTime)
+          };
+          merged = true;
+          break;
+        } else if (curTime.startTime < time.startTime) {
+          results.splice(j, 0, curTime);
+          merged = true;
+          break;
+        }
       }
-    });
+      if (!merged) { results.push(curTime); }
+    }
 
-    return [];
+    return results;
+}
+
+function isOverlapping(t1, t2) {
+  return (
+    isValBetween(t1.startTime, t2.startTime, t2.endTime) ||
+    isValBetween(t1.endTime, t2.startTime, t2.endTime) ||
+    isValBetween(t2.startTime, t1.startTime, t1.endTime) ||
+    isValBetween(t2.endTime, t1.startTime, t1.endTime)
+  );
+}
+
+function isValBetween(val, x, y) {
+  return val >= x && val <= y;
 }
 
 
 
 
 
-// [
-//   {startTime: 0,  endTime: 1},
-//   {startTime: 3,  endTime: 5},
-//   {startTime: 4,  endTime: 8},
-//   {startTime: 10, endTime: 12},
-//   {startTime: 9,  endTime: 10},
-// ]
-
-
-// [
-//   {startTime: 0, endTime: 1},
-//
-// ]
-
-// store min, max
-
-
-// let min = 0;
-// let max = 1;
-//
-// let result = {
-//   0: 1,
-//   3: 5
-// };
-//
-// let endTimeStore = {
-//   1: 0,
-//   5: 3
-// };
-//
-// let startTimeStore = {
-//   0: 1,
-//   5: 3
-// };
-
-//
 
 
 
