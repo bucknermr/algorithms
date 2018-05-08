@@ -1,30 +1,47 @@
 function mergeRanges(meetings) {
-  const sorted = deepCopy(meetings)
-    .sort((t1, t2) => t1.startTime - t2.startTime);
+    // Merge meetings ranges
+    const results = [meetings[0]];
 
-  const results = [sorted[0]];
+    for (let i = 1; i < meetings.length; i++) {
+      let curTime = meetings[i];
+      let merged = false;
 
-  let lastEndTime = results[0].endTime;
+      for (let j = 0; j < results.length; j++) {
+        let time = results[j];
 
-  for (let i = 1; i < sorted.length; i++) {
-    let curTime = sorted[i];
-    if (lastEndTime >= curTime.startTime) {
-      results[results.length - 1].endTime = Math.max(
-        lastEndTime,
-        curTime.endTime
-      );
-    } else {
-      results.push(curTime);
+        if (!merged && isOverlapping(time, curTime)) {
+          results[j] = {
+            startTime: Math.min(time.startTime, curTime.startTime),
+            endTime: Math.max(time.endTime, curTime.endTime)
+          };
+          merged = true;
+          break;
+        } else if (curTime.startTime < time.startTime) {
+          results.splice(j, 0, curTime);
+          merged = true;
+          break;
+        }
+      }
+      if (!merged) { results.push(curTime); }
     }
-    lastEndTime = results[results.length - 1].endTime;
-  }
 
-  return results;
+    return results;
 }
 
-function deepCopy(obj) {
-  return JSON.parse(JSON.stringify(obj));
+function isOverlapping(t1, t2) {
+  return (
+    isValBetween(t1.startTime, t2.startTime, t2.endTime) ||
+    isValBetween(t1.endTime, t2.startTime, t2.endTime) ||
+    isValBetween(t2.startTime, t1.startTime, t1.endTime) ||
+    isValBetween(t2.endTime, t1.startTime, t1.endTime)
+  );
 }
+
+function isValBetween(val, x, y) {
+  return val >= x && val <= y;
+}
+
+
 
 
 
