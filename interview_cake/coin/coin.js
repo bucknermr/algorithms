@@ -1,25 +1,37 @@
-function changePossibilities(amountLeft, denominations, index = 0) {
-  if (index === denominations.length) return 0;
-  if (amountLeft === 0) return 1;
+function changePossibilities(amount, denominations) {
+  const store = {};
 
-  let count = 0;
-  const currentDenomination = denominations[index];
-
-
-  while (amountLeft > 0) {
-    count += changePossibilities(amountLeft, denominations, index + 1);
-    amountLeft -= currentDenomination;
+  for (let i = 0; i <= denominations.length; i++) {
+    store[i] = {};
   }
 
-
-  return amountLeft === 0 ? count + 1 : count;
+  return changePossibilitiesUtil(amount, denominations, 0, store);
 }
 
+function changePossibilitiesUtil(amountLeft, denominations, index, store) {
+  if (amountLeft in store[index]) return store[index][amountLeft];
+  if (amountLeft === 0) return 1;
+  if (index === denominations.length) return 0;
 
 
 
+  const currentDenomination = denominations[index];
+  let count = 0;
+  let currentAmountLeft = amountLeft;
 
+  while (currentAmountLeft >= 0) {
+    count += changePossibilitiesUtil(
+      currentAmountLeft,
+      denominations,
+      index + 1,
+      store
+    );
+    currentAmountLeft -= currentDenomination;
+  }
 
+  store[index][amountLeft] = count;
+  return count;
+}
 
 
 
