@@ -13,8 +13,6 @@ def merge_ranges(meetings):
     return results
 
 
-# meetings = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
-# print(merge_ranges(meetings))
 
 
 
