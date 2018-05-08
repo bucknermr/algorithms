@@ -1,7 +1,15 @@
 function mergeRanges(meetings) {
 
     // Merge meetings ranges
+    const store = {};
 
+    meetings.forEach(time => {
+      if (store.hasOwnProperty(time.startTime)) {
+        return true;
+      } else if (store) {
+        return true;
+      }
+    });
 
     return [];
 }
@@ -10,15 +18,42 @@ function mergeRanges(meetings) {
 
 
 
+// [
+//   {startTime: 0,  endTime: 1},
+//   {startTime: 3,  endTime: 5},
+//   {startTime: 4,  endTime: 8},
+//   {startTime: 10, endTime: 12},
+//   {startTime: 9,  endTime: 10},
+// ]
 
 
+// [
+//   {startTime: 0, endTime: 1},
+//
+// ]
+
+// store min, max
 
 
+// let min = 0;
+// let max = 1;
+//
+// let result = {
+//   0: 1,
+//   3: 5
+// };
+//
+// let endTimeStore = {
+//   1: 0,
+//   5: 3
+// };
+//
+// let startTimeStore = {
+//   0: 1,
+//   5: 3
+// };
 
-
-
-
-
+//
 
 
 
