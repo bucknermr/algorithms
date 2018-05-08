@@ -1,18 +1,20 @@
-function changePossibilities(amountLeft, denominations) {
-  if (denominations.length === 0) return 0;
-  if (amountLeft.length === 0) return 1;
+function changePossibilities(amountLeft, denominations, index = 0) {
+  if (index === denominations.length) return 0;
+  if (amountLeft === 0) return 1;
 
   let count = 0;
+  const currentDenomination = denominations[index];
 
 
   while (amountLeft > 0) {
-    count += changePossibilities(amountLeft, denominations.slice(1));
-    amountLeft -= denominations[0];
+    count += changePossibilities(amountLeft, denominations, index + 1);
+    amountLeft -= currentDenomination;
   }
 
 
   return amountLeft === 0 ? count + 1 : count;
 }
+
 
 
 
