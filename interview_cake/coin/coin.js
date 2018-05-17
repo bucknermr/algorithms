@@ -1,37 +1,85 @@
+// Bottom up
+
+// 4, [1, 2, 3]
+
+// let store = {
+//   0: 1,
+//   1: 1,
+//   2: 2,
+//   3: 3,
+//   4:
+// };
+//
+// let seen = {
+//   3
+// }
+
+// currentCount = 3
+// el = 2
+
+// 1
+// 2
+// 3
+// 4
+
 function changePossibilities(amount, denominations) {
-  const store = {};
+  if (amount === 0) return 1;
+  if (denominations.length === 0) return 0;
 
-  for (let i = 0; i <= denominations.length; i++) {
-    store[i] = {};
+  let store = { 0: 1 };
+
+  for (let i = 1; i <= amount; i++) {
+    let seenRemainder = new Set();
+    let count = 0;
+    denominations.forEach(coin => {
+      let remainder = amount - coin;
+      if (remainder >= 0 && remainder in store && !seen.has(remainder)) {
+        coint +=
+      }
+    });
   }
 
-  return changePossibilitiesUtil(amount, denominations, 0, store);
+  denominations.forEach(coin => {
+
+  });
 }
 
-function changePossibilitiesUtil(amountLeft, denominations, index, store) {
-  if (amountLeft in store[index]) return store[index][amountLeft];
-  if (amountLeft === 0) return 1;
-  if (index === denominations.length) return 0;
+// Recursive / top-down
 
-
-
-  const currentDenomination = denominations[index];
-  let count = 0;
-  let currentAmountLeft = amountLeft;
-
-  while (currentAmountLeft >= 0) {
-    count += changePossibilitiesUtil(
-      currentAmountLeft,
-      denominations,
-      index + 1,
-      store
-    );
-    currentAmountLeft -= currentDenomination;
-  }
-
-  store[index][amountLeft] = count;
-  return count;
-}
+// function changePossibilities(amount, denominations) {
+//   const store = {};
+//
+//   for (let i = 0; i <= denominations.length; i++) {
+//     store[i] = {};
+//   }
+//
+//   return changePossibilitiesUtil(amount, denominations, 0, store);
+// }
+//
+// function changePossibilitiesUtil(amountLeft, denominations, index, store) {
+//   if (amountLeft in store[index]) return store[index][amountLeft];
+//   if (amountLeft === 0) return 1;
+//   if (index === denominations.length) return 0;
+//
+//
+//
+//   const currentDenomination = denominations[index];
+//   let count = 0;
+//   let currentAmountLeft = amountLeft;
+//
+//   while (currentAmountLeft >= 0) {
+//     count += changePossibilitiesUtil(
+//       currentAmountLeft,
+//       denominations,
+//       index + 1,
+//       store
+//     );
+//     currentAmountLeft -= currentDenomination;
+//   }
+//
+//   store[index][amountLeft] = count;
+//   return count;
+// }
 
 
 
